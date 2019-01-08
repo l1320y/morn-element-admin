@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { isvalidUsername } from '@/utils/validate'
+import { validatePassword, validateUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect'
 import SocialSign from './socialsignin'
 
@@ -73,16 +73,16 @@ export default {
   name: 'Login',
   components: { LangSelect, SocialSign },
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+    const usernameValidator = (rule, value, callback) => {
+      if (!validateUsername(value)) {
+        callback(new Error('请输入4-16位用户名'))
       } else {
         callback()
       }
     }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+    const passwordValidator = (rule, value, callback) => {
+      if (!validatePassword(value)) {
+        callback(new Error('请输入6-16位密码'))
       } else {
         callback()
       }
@@ -93,8 +93,8 @@ export default {
         password: '1111111'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        username: [{ required: true, trigger: 'blur', validator: usernameValidator }],
+        password: [{ required: true, trigger: 'blur', validator: passwordValidator }]
       },
       passwordType: 'password',
       loading: false,
