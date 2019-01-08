@@ -36,7 +36,8 @@ service.interceptors.response.use(
         type: res.level,
         duration: 5 * 1000
       })
-      // // 请自行在引入 MessageBox
+      return Promise.reject(res.message)
+      // // 请自行引入 MessageBox
       // // import { Message, MessageBox } from 'element-ui'
       // MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
       //   confirmButtonText: '重新登录',
@@ -47,13 +48,12 @@ service.interceptors.response.use(
       //     location.reload() // 为了重新实例化vue-router对象 避免bug
       //   })
       // })
-      return Promise.reject('error')
     } else {
       return response.data
     }
   },
   error => {
-    console.log('err' + error) // for debug
+    console.log(error) // for debug
     Message({
       message: error.message,
       type: 'error',
