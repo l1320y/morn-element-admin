@@ -1,10 +1,16 @@
 /**
  * Created by jiachenpan on 16/11/18.
  */
+/* 校验用户名*/
+export function validateUsername(str) {
+  const reg = /[\w-]{4,16}/
+  return reg.test(str)
+}
 
-export function isvalidUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+/* 校验密码*/
+export function validatePassword(str) {
+  const reg = /[\S]{6,16}/
+  return reg.test(str)
 }
 
 /* 合法uri*/
