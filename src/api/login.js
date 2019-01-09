@@ -6,7 +6,7 @@ export function loginByUsername(username, password) {
     password
   }
   return request({
-    url: '/login/login',
+    url: '/login',
     method: 'post',
     data
   })
@@ -14,11 +14,15 @@ export function loginByUsername(username, password) {
 
 export function logout() {
   return request({
-    url: '/login/logout',
+    url: '/logout',
     method: 'post'
   })
 }
 
+/**
+ * 获取用户信息
+ * @param token 令牌
+ */
 export function getUserInfo(token) {
   return request({
     url: '/user/info',
@@ -26,4 +30,3 @@ export function getUserInfo(token) {
     params: { token }
   })
 }
-
