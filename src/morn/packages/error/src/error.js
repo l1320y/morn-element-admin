@@ -5,7 +5,60 @@ class ApplicationError extends Error {
   }
 }
 
-class ApplicationMessage {}
+class ApplicationMessage {
+  #code;
+  #message;
+  #solution;
+
+  constructor(code, message, solution) {
+    this.#code = code
+    this.#message = message
+    this.#solution = solution
+  }
+
+  code() {
+    return this.#code
+  }
+
+  code(code) {
+    this.#code = code
+    return this
+  }
+  message(message) {
+    this.#message = message
+    return this
+  }
+  solution(solution) {
+    this.#solution = solution
+    return this
+  }
+
+  builder() {
+    return new ApplicationMessage.Builder()
+  }
+
+  static Builder=class {
+    #code;
+    #message;
+    #solution;
+
+    code(code) {
+      this.#code = code
+      return this
+    }
+    message(message) {
+      this.#message = message
+      return this
+    }
+    solution(solution) {
+      this.#solution = solution
+      return this
+    }
+    build() {
+      return new ApplicationMessage(this.#code, this.#message, this.#solution)
+    }
+  }
+}
 
 class ErrorProcessor {
   /**
@@ -55,7 +108,10 @@ class ErrorProcessor {
  * 异常解释器
  */
 class ErrorInterpreter {
-  interpret() {}
+  #error
+  interpret(error) {
+    this.#error = error
+  }
 }
 
-export { ApplicationError, ApplicationMessage, ErrorProcessor }
+export { ApplicationError, ApplicationMessage, ErrorInterpreter, ErrorProcessor }
