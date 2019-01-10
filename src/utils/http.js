@@ -42,11 +42,13 @@ http.interceptors.response.use(
     }
   },
   error => {
-    console.log(error) // for debug
     let message
     switch (error.response.status) {
       case 401:
         message = '401：尚未登录/登录超时'
+        break
+      case 404:
+        message = '404：请求的资源不存在'
         break
       case 504:
         message = '504：服务器未响应'
