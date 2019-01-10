@@ -1,5 +1,5 @@
 import { loginByUsername, logout, getUserInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { useToken, getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
   state: {
@@ -48,10 +48,14 @@ const user = {
     LoginByUsername({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
-        loginByUsername(username, userInfo.password).then(response => {
-          const data = response.data
-          commit('SET_TOKEN', data.token)
-          setToken(response.data.token)
+        loginByUsername(username, userInfo.password).then(data => {
+          let token
+          // 判断是否使用Token机制，true：记录服务端token；false：记录用户名作为token
+          if (useToken()) {
+            if (data.token) { token = data.token } else { console.error('无法获取Token') }
+          } else { token = username }
+          commit('SET_TOKEN', token)
+          setToken(token)
           resolve()
         }).catch(error => {
           reject(error)
