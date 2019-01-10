@@ -6,7 +6,7 @@ import { getToken } from '@/utils/auth'
 // create an axios instance
 const http = axios.create({
   baseURL: process.env.BASE_API, // api 的 base_url
-  timeout: 5000 // request timeout
+  timeout: 0 // request timeout
 })
 
 // request interceptor
@@ -29,27 +29,16 @@ http.interceptors.request.use(
 // response interceptor
 http.interceptors.response.use(
   response => {
-    const res = response.data
-    if (!res.success) {
+    const result = response.data
+    if (!result.success) {
       Message({
-        message: res.message,
-        type: res.level,
+        message: result.message,
+        type: result.level,
         duration: 5 * 1000
       })
-      return Promise.reject(res.message)
-      // // 请自行引入 MessageBox
-      // // import { Message, MessageBox } from 'element-ui'
-      // MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
-      //   confirmButtonText: '重新登录',
-      //   cancelButtonText: '取消',
-      //   type: 'warning'
-      // }).then(() => {
-      //   store.dispatch('FedLogOut').then(() => {
-      //     location.reload() // 为了重新实例化vue-router对象 避免bug
-      //   })
-      // })
+      return Promise.reject(result.message)
     } else {
-      return response.data
+      return result.data || {}
     }
   },
   error => {
