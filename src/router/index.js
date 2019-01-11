@@ -112,38 +112,6 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
-    path: '/permission',
-    component: Layout,
-    redirect: '/permission/index',
-    alwaysShow: true, // will always show the root menu
-    meta: {
-      title: 'permission',
-      icon: 'lock',
-      privileges: ['admin', 'editor'] // you can set privileges in root nav
-    },
-    children: [
-      {
-        path: 'page',
-        component: () => import('@/views/permission/page'),
-        name: 'PagePermission',
-        meta: {
-          title: 'pagePermission',
-          privileges: ['admin'] // or you can only set privileges in sub nav
-        }
-      },
-      {
-        path: 'directive',
-        component: () => import('@/views/permission/directive'),
-        name: 'DirectivePermission',
-        meta: {
-          title: 'directivePermission'
-          // if do not set privileges, means: this page does not require permission
-        }
-      }
-    ]
-  },
-
-  {
     path: '/icon',
     component: Layout,
     children: [
