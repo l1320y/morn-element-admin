@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import features from '@/features'
-import { AUTH_TOKEN } from '@/features/auth'
+import AUTH from '@/features/auth'
 
 const TokenKey = 'Admin-Token'
 
@@ -9,7 +9,7 @@ const TokenKey = 'Admin-Token'
  * @return {boolean} 是否使用Token鉴权
  */
 export function useToken() {
-  return features.auth.mode === AUTH_TOKEN
+  return features.auth.mode === AUTH.AUTH_TOKEN
 }
 
 export function getToken() {
