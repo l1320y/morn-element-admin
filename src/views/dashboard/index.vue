@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <component :is="currentRole"/>
+    <component :is="currentPrivilege"/>
   </div>
 </template>
 
@@ -14,17 +14,17 @@ export default {
   components: { adminDashboard, editorDashboard },
   data() {
     return {
-      currentRole: 'adminDashboard'
+      currentPrivilege: 'adminDashboard'
     }
   },
   computed: {
     ...mapGetters([
-      'roles'
+      'privileges'
     ])
   },
   created() {
-    if (!this.roles.includes('admin')) {
-      this.currentRole = 'editorDashboard'
+    if (!this.privileges.includes('admin')) {
+      this.currentPrivilege = 'editorDashboard'
     }
   }
 }

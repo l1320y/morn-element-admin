@@ -10,7 +10,7 @@ const user = {
     name: '',
     avatar: '',
     introduction: '',
-    roles: [],
+    privileges: [],
     setting: {
       articlePlatform: []
     }
@@ -38,8 +38,8 @@ const user = {
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
     },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles
+    SET_PRIVILEGES: (state, privileges) => {
+      state.privileges = privileges
     }
   },
 
@@ -67,10 +67,10 @@ const user = {
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(data => {
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
+          if (data.privileges && data.privileges.length > 0) { // 验证返回的privileges是否是一个非空数组
+            commit('SET_PRIVILEGES', data.privileges)
           } else {
-            reject('getInfo: roles must be a non-null array !')
+            reject('getInfo: privileges must be a non-null array !')
           }
 
           commit('SET_NAME', data.name)
@@ -102,7 +102,7 @@ const user = {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
+          commit('SET_PRIVILEGES', [])
           removeToken()
           resolve()
         }).catch(error => {
@@ -121,13 +121,13 @@ const user = {
     },
 
     // 动态修改权限
-    ChangeRoles({ commit, dispatch }, role) {
+    ChangePrivileges({ commit, dispatch }, privilege) {
       return new Promise(resolve => {
-        commit('SET_TOKEN', role)
-        setToken(role)
-        getUserInfo(role).then(response => {
+        commit('SET_TOKEN', privilege)
+        setToken(privilege)
+        getUserInfo(privilege).then(response => {
           const data = response.data
-          commit('SET_ROLES', data.roles)
+          commit('SET_PRIVILEGES', data.privileges)
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           commit('SET_INTRODUCTION', data.introduction)

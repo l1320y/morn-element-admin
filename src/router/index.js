@@ -24,7 +24,7 @@ import nestedRouter from './modules/nested'
 * redirect: noredirect           if `redirect:noredirect` will no redirect in the breadcrumb
 * name:'router-name'             the name is used by <keep-alive> (must set!!!)
 * meta : {
-    roles: ['admin','editor']    will control the page roles (you can set multiple roles)
+    privileges: ['admin','editor']    will control the page privileges (you can set multiple privileges)
     title: 'title'               the name show in submenu and breadcrumb (recommend set)
     icon: 'svg-name'             the icon show in the sidebar
     noCache: true                if true, the page will no be cached(default is false)
@@ -119,7 +119,7 @@ export const asyncRouterMap = [
     meta: {
       title: 'permission',
       icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      privileges: ['admin', 'editor'] // you can set privileges in root nav
     },
     children: [
       {
@@ -128,7 +128,7 @@ export const asyncRouterMap = [
         name: 'PagePermission',
         meta: {
           title: 'pagePermission',
-          roles: ['admin'] // or you can only set roles in sub nav
+          privileges: ['admin'] // or you can only set privileges in sub nav
         }
       },
       {
@@ -137,7 +137,7 @@ export const asyncRouterMap = [
         name: 'DirectivePermission',
         meta: {
           title: 'directivePermission'
-          // if do not set roles, means: this page does not require permission
+          // if do not set privileges, means: this page does not require permission
         }
       }
     ]
