@@ -72,10 +72,9 @@ const user = {
           } else {
             reject('getInfo: privileges must be a non-null array !')
           }
-
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          commit('SET_INTRODUCTION', data.introduction)
+          commit('SET_NAME', data.name || 'Timely Rain')
+          commit('SET_AVATAR', data.avatar || 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
+          commit('SET_INTRODUCTION', data.introduction || 'https://github.com/morn-team')
           resolve(data)
         }).catch(error => {
           reject(error)
