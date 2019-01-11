@@ -32,8 +32,8 @@ http.interceptors.response.use(
     const result = response.data
     if (!result.success) {
       Message({
-        message: result.message,
-        type: result.level,
+        message: result.message || '未知错误，应答结果不是标准格式',
+        type: result.level || 'error',
         duration: 5 * 1000
       })
       return Promise.reject(result.message)
