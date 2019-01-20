@@ -1,8 +1,8 @@
 <template>
   <div class="dashboard-editor-container">
     <div class=" clearfix">
-      <pan-thumb :image="avatar" style="float: left"> Your roles:
-        <span v-for="item in roles" :key="item" class="pan-info-roles">{{ item }}</span>
+      <pan-thumb :image="avatar" style="float: left"> Your privileges:
+        <span v-for="item in privileges" :key="item" class="pan-info-privileges">{{ item }}</span>
       </pan-thumb>
       <github-corner style="position: absolute; top: 0px; border: 0; right: 0;"/>
       <div class="info-container">
@@ -33,7 +33,7 @@ export default {
     ...mapGetters([
       'name',
       'avatar',
-      'roles'
+      'privileges'
     ])
   }
 }
@@ -50,7 +50,7 @@ export default {
     background-color: #e3e3e3;
     min-height: 100vh;
     padding: 50px 60px 0px;
-    .pan-info-roles {
+    .pan-info-privileges {
       font-size: 12px;
       font-weight: 700;
       color: #333;
