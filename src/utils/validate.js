@@ -1,5 +1,7 @@
 /**
- * Created by jiachenpan on 16/11/18.
+ * 通用校验算法
+ * @author timely-rain
+ * @since 1.0.0, 2019/1/20
  */
 /* 校验用户名*/
 export function validateUsername(str) {
