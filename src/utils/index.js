@@ -1,7 +1,8 @@
 /**
- * Created by jiachenpan on 16/11/18.
+ * 工具类
+ * @author timely-rain
+ * @since 1.0.0, 2019/1/20
  */
-
 export function parseTime(time, cFormat) {
   if (arguments.length === 0) {
     return null
@@ -129,11 +130,11 @@ export function param2Obj(url) {
   }
   return JSON.parse(
     '{"' +
-      decodeURIComponent(search)
-        .replace(/"/g, '\\"')
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"') +
-      '"}'
+    decodeURIComponent(search)
+      .replace(/"/g, '\\"')
+      .replace(/&/g, '","')
+      .replace(/=/g, '":"') +
+    '"}'
   )
 }
 
@@ -289,3 +290,81 @@ export function uniqueArr(arr) {
 export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
+
+/**
+ * 数组工具
+ */
+const ArrayUtils = {
+  /**
+   * 查询数组中的一条记录
+   * @param array 数组
+   * @param value 属性值
+   * @returns {*|{}}
+   */
+  findWithValue: function(array, value) {
+    return ArrayUtils.findWithAttribute(array, 'value', value) || {}
+  },
+  /**
+   * 查询数组中的一条记录
+   * @param array 数组
+   * @param name 属性名称
+   * @param value 属性值
+   * @returns {*|{}}
+   */
+  findWithAttribute: function findWithAttribute(array, name, value) {
+    return array.find(o => String(o[name]) === String(value)) || {}
+  }
+}
+
+/**
+ * 视图常量
+ * @author timely-rain
+ * @since 1.0.0, 2019/1/16
+ */
+const ViewStatus = {
+  Add: 'add', // 新增
+  Update: 'update', // 修改
+  Read: 'read' // 查看
+}
+
+/**
+ * 视图工具
+ * @author timely-rain
+ * @since 1.0.0, 2019/1/16
+ */
+const ViewUtils = {
+  /**
+   * 判断是否为新增状态
+   * @param status 页面状态
+   * @returns {boolean} 是否为新增状态
+   */
+  isAdd: function(status) {
+    return status === ViewStatus.Add
+  },
+  /**
+   * 判断是否为更新状态
+   * @param status 页面状态
+   * @returns {boolean} 是否为新增状态
+   */
+  isUpdate: function(status) {
+    return status === ViewStatus.Update
+  },
+  /**
+   * 判断是否编辑状态
+   * @param status 页面状态
+   * @returns {boolean} 是否编辑状态
+   */
+  isEdit: function(status) {
+    return status !== ViewStatus.Read
+  },
+  /**
+   * 判断是否编辑状态
+   * @param status 页面状态
+   * @returns {boolean} 是否编辑状态
+   */
+  isRead: function(status) {
+    return status === ViewStatus.Read
+  }
+}
+
+export { ArrayUtils, ViewStatus, ViewUtils }
